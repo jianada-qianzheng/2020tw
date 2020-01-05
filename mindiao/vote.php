@@ -9,41 +9,41 @@
     // d1x  192996
     // d1y  205904
     // e1x
-$vote = $_GET["vote"];
-$city=$_GET["city"];
-$age=$_GET["age"];
-$gender=$_GET["gender"];
-$userGUID = $_GET["userGUID"];
-$voteid=$_GET["voteId"];
+    $vote = $_GET["vote"];
+    $city=$_GET["city"];
+    $age=$_GET["age"];
+    $gender=$_GET["gender"];
+    $userGUID = $_GET["userGUID"];
+    $voteid=$_GET["voteId"];
     
-$servername = "localhost";
-$username = "service";
-$password = "83422zwZ";
-$dbname = "vote";
-$voteCount1 =(double)0;
-$voteCount2 =(double)0;
-$voteCount3 =(double) 0;
-$voteCount4=(double)0;
+    $servername = "localhost";
+    $username = "service";
+    $password = "83422zwZ";
+    $dbname = "vote";
+    $voteCount1 =(double)0;
+    $voteCount2 =(double)0;
+    $voteCount3 =(double) 0;
+    $voteCount4=(double)0;
     $voteCount5=(double)0;
     $voteCount6=(double)0;
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-$sql1 ="update vote2 set active=0 where user='$userGUID' ";
-if ($conn->query($sql1) === TRUE ){
-    print("   update vote successfully   ");
-}else{
-    print  ("update error");
-}
-$sql = "INSERT INTO vote2 (user, vote,active,id,age,hukou,sex ) VALUES ( '$userGUID','$vote',1,'$voteid','$age','$city','$gender' )";
-if ($conn->query($sql) === TRUE) {
-    print ( "   New record created successfully   ");
-} else {
-//print ("error");   
- echo "Error: " . $sql . "<br>" . $conn->error;
-}
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    $sql1 ="update vote2 set active=0 where user='$userGUID' ";
+    if ($conn->query($sql1) === TRUE ){
+        print("   update vote successfully   ");
+    }else{
+        print  ("update error");
+    }
+    $sql = "INSERT INTO vote2 (user, vote,active,id,age,hukou,sex ) VALUES ( '$userGUID','$vote',1,'$voteid','$age','$city','$gender' )";
+    if ($conn->query($sql) === TRUE) {
+        print ( "   New record created successfully   ");
+    } else {
+        //print ("error");   
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
     
     
     
@@ -518,7 +518,7 @@ if ($conn->query($sql) === TRUE) {
                     $ageRange1=$age*10-1;
                     $ageRange2=$age*10+10;
                 
-                $sql2 = "SELECT vote,  count( *) as votecount  FROM vote2 where active=1 and hukou='$city' and age>'$ageRange1' and age<'$ageRange2' and sex='$gender' and (TIMESTAMPDIFF(DAY, date, NOW()) <7) group by vote order by vote ";
+                    $sql2 = "SELECT vote,  count( *) as votecount  FROM vote2 where active=1 and hukou='$city' and age>'$ageRange1' and age<'$ageRange2' and sex='$gender' and (TIMESTAMPDIFF(DAY, date, NOW()) <7) group by vote order by vote ";
                 }
                 $groupCount1=0;
                 $groupCount2=0;
@@ -648,43 +648,46 @@ if ($conn->query($sql) === TRUE) {
 //
 //$pencentage4 = $voteCount4/$voteTotal;
     print("percentage");
-print (""+$percentage1);
-print ((string)$percentage2);
-print ((string)$percentage3);
-print ((string)$percentage4);
-$sql3 ="update candidate2 set vote ='$percentage1',count='$total'   where id =1 ";
-if ($conn->query($sql3) === TRUE ){
-    print("update candidate 1 vote information successfully");
-}else{
-    print  ("update 1 error");
-}
-$sql4 ="update candidate2 set vote ='$percentage2',count='$total'   where id =2 ";
-if ($conn->query($sql4) === TRUE ){
-    print("update cnadidate 2 vote  successfully");
-}else{
-    print  ("update error");
-}
+    print (""+$percentage1);
+    print ((string)$percentage2);
+    print ((string)$percentage3);
+    print ((string)$percentage4);
+
+    $sql3 ="update candidate2 set vote ='$percentage1',count='$total'   where id =1 ";
+
+    if ($conn->query($sql3) === TRUE ){
+        print("update candidate 1 vote information successfully");
+    }else{
+        print  ("update 1 error");
+    }
+    $sql4 ="update candidate2 set vote ='$percentage2',count='$total'   where id =2 ";
+    if ($conn->query($sql4) === TRUE ){
+        print("update cnadidate 2 vote  successfully");
+    }else{
+        print  ("update error");
+    }
     print($sql4);
-$sql5 ="update candidate2 set vote ='$percentage3',count='$total'   where id =3 ";
-if ($conn->query($sql5) === TRUE ){
-    print("update candidate 3 vote  successfully");
-}else{
-    print  ("update error");
-}
-$sql6 ="update candidate2 set vote ='$percentage4',count='$total'   where id =4 ";
-if ($conn->query($sql6) === TRUE ){
-    print("update vote successfully");
-}else{
-    print  ("update error");
-} 
-// Add each row into our results array
+
+    $sql5 ="update candidate2 set vote ='$percentage3',count='$total'   where id =3 ";
+    if ($conn->query($sql5) === TRUE ){
+        print("update candidate 3 vote  successfully");
+    }else{
+        print  ("update error");
+    }
+    $sql6 ="update candidate2 set vote ='$percentage4',count='$total'   where id =4 ";
+    if ($conn->query($sql6) === TRUE ){
+        print("update vote successfully");
+    }else{
+        print  ("update error");
+    } 
+    // Add each row into our results array
  
-$sql7 ="update candidate2 set vote ='$percentage5',count='$total'   where id =5 ";
-if ($conn->query($sql7) === TRUE ){
-    print("update vote successfully");
-}else{
-    print  ("update error");
-}
+    $sql7 ="update candidate2 set vote ='$percentage5',count='$total'   where id =5 ";
+    if ($conn->query($sql7) === TRUE ){
+        print("update vote successfully");
+    }else{
+        print  ("update error");
+    }
     
     
     $sql8 ="update candidate2 set vote ='$percentage6',count='$total'   where id =6 ";
@@ -694,5 +697,5 @@ if ($conn->query($sql7) === TRUE ){
         print  ("update error");
         
     }
-$conn->close();
+    $conn->close();
 ?>
