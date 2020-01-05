@@ -1,304 +1,317 @@
-
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <head>
 
 
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
-    <!-- your CSS file link goes HERE -->
+
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
-<!--    <script src="jquery-3.4.1.min.js"></script>-->
+
     <script>
-       var ip="";
-		
-var country="";
-// Create the XHR object.
-function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  if ("withCredentials" in xhr) {
-    // XHR for Chrome/Firefox/Opera/Safari.
-    xhr.open(method, url, true);
-  } else if (typeof XDomainRequest != "undefined") {
-    // XDomainRequest for IE.
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-  } else {
-    // CORS not supported.
-    xhr = null;
-  }
-  return xhr;
-}
-
-// Helper method to parse the title tag from the response.
-function getTitle(text) {
-  return text.match('<title>(.*)?</title>')[1];
-}
-
-// Make the actual CORS request.
-function makeCorsRequest(url) {
-  // This is a sample server that supports CORS.
-//  var url = 'http://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
-
-  var xhr = createCORSRequest('GET', url);
-  if (!xhr) {
-//    alert('CORS not supported');
-    return;
-  }
-
-  // Response handlers.
-  xhr.onload = function() {
-    var text = xhr.responseText;
-    var ipobj =JSON.parse(text);
-   ip = ipobj.ip;
- country=ipobj.country_name; 
- 
-if (ip != "" && ip != null&&country!=""&&country!=null) {
-      setCookie("ipcookie", ip, 365);
-  setCookie("countrycookie",country,365); 
- }
-
-//alert('Response from CORS request to ' + ip + ': ' +country );
-  };
-
-  xhr.onerror = function() {
- //   alert('Woops, there was an error making the request.');
-  };
-
-  xhr.send();
-}
-
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  var expires = "expires="+d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function checkCookie() {
-   ip = getCookie("ipcookie");
-
-
-	country= getCookie("countrycookie");  
-if (ip != ""&&country!="") {
-
-  //  alert("get ip and country： " + ip+","+country);
-  } else {
-    //ip = prompt("Please enter your name:", "");
-getIP();    
-
-//if (ip != "" && ip != null) {
- //     setCookie("ipcookie", ip, 365);
-  //  }
-  }
-}
+        var uuid = "";
 
 
 
 
-
-
-
-	function getIP(){
-//		window.alert("get ip");
-var theUrl="https://api.ipapi.com/api/check?access_key=1c916d929672467db6decd4976f217c2&format=1";	
-
-		makeCorsRequest(theUrl);
-
-
-
-        } 
-        
-        function vote1() {
-
-alert("感謝你的投票!");	  
- setInterval(getCandidate	,3000);
-            if(country=="Taiwan"){
-
-		voteid=uuidv4(); 
-            var theUrl="/mindiao/vote.php?vote=1&userGUID="+ip+"&voteid="+voteid;
-		
-          httpGetAsync(theUrl,callback); 
-             } 
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
-
-	function vote2() {
-alert("感謝你的投票!");          
- setInterval(getCandidate     ,3000);
-            if(country=="Taiwan"){
-
-                voteid=uuidv4();
-            var theUrl="/mindiao/vote.php?vote=2&userGUID="+ip+"&voteid="+voteid;
-
-          httpGetAsync(theUrl,callback);
-             }
-        }
-
-
-function vote3() {
-alert("感謝你的投票!");       
-    setInterval(getCandidate     ,3000);
-            if(country=="Taiwan"){
-
-                voteid=uuidv4();
-
-            var theUrl="/mindiao/vote.php?vote=3&userGUID="+ip+"&voteid="+voteid;
-
-          httpGetAsync(theUrl,callback);
-             }
-        }
-
-
-function vote4() {
-alert("感謝你的投票!"); 
-          setInterval(getCandidate     ,3000);
-            if(country=="Taiwan"){
-
-                voteid=uuidv4();
-            var theUrl="/mindiao/vote.php?vote=4&userGUID="+ip+"&voteid="+voteid;
-
-          httpGetAsync(theUrl,callback);
-             }
-        }
-
-
-function vote5() {
- alert("感謝你的投票!");
-          setInterval(getCandidate     ,3000);
-            if(country=="Taiwan"){
-
-                voteid=uuidv4();
-            var theUrl="/mindiao/vote.php?vote=5&userGUID="+ip+"&voteid="+voteid;
-
-          httpGetAsync(theUrl,callback);
-             }
-        }	
-
-
-
-
-
-	function getCandidate(){
-//alert("感謝你的投票!");
-
-//		window.alert("updateUI");
-
-		var theUrl="/mindiao/candidate.php";
-		httpGetAsync(theUrl,updateUI);
-	}
-	function updateUI(data){
-		jsonarray=JSON.parse(data);
-		
-		var percentageView1=document.getElementById("percentage1");
-
-		var percentage1=Math.round(jsonarray[0].vote*100);	
-		//alert(percentage1);	
-		var count1=jsonarray[0].count;
-		percentageView1.style="width: "+percentage1 +"%;font-size:40;";
-		percentageView1.innerText=percentage1+"%";
-
-
-
-
-
-
-
-
-
-
-		var percentageView2=document.getElementById("percentage2");
-
-                var percentage2=Math.round(jsonarray[1].vote*100);
-
-                //alert(percentage2);
-                var count2=jsonarray[1].count;
-                percentageView2.style="width: "+percentage2 +"%;font-size:40;";
-                percentageView2.innerText=percentage2+"%";
-
-
-
-		var percentageView3=document.getElementById("percentage3");
-
-                var percentage3=Math.round(jsonarray[2].vote*100);
-                //alert(percentage3);
-                var count3=jsonarray[2].count;
-                percentageView3.style="width: "+percentage3 +"%;font-size:40;";
-                percentageView3.innerText=percentage3+"%";
-
-
-
-		var percentageView4=document.getElementById("percentage4");
-
-                var percentage4=Math.round(jsonarray[3].vote*100);
-                //alert(percentage1);
-                var count4=jsonarray[3].count;
-                percentageView4.style="width: "+percentage4 +"%;font-size:40;";
-                percentageView4.innerText=percentage4+"%";
-
-
-
-		var percentageView5=document.getElementById("percentage5");
-
-                var percentage5=Math.round(jsonarray[4].vote*100);
-               // alert(percentage5);
-                var count5=jsonarray[4].count;
-                percentageView5.style="width: "+percentage5 +"%;font-size:40;";
-                percentageView5.innerText=percentage5+"%";
-
-
-
-		var totalView=document.getElementById("total");
-
-		var total=parseInt(count1)+parseInt(count2)+parseInt(count3)+parseInt(count4)+parseInt(count5);	
-	totalView.innerText="有效票數 "+total;
-	}
-
-        function callback(data){
-
-             // window.alert(data);
-        }
-
-function uuidv4() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-} 
- 
-
-
-        function httpGetAsync(theUrl, callback)
-            {
-               var xmlHttp = new XMLHttpRequest();
-                xmlHttp.onreadystatechange = function() { 
-                   if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                   callback(xmlHttp.responseText);
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
                 }
-                xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-                xmlHttp.send(null);
-         }
-  </script>
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            uuid = getCookie("idcookie");
+
+
+
+            if (uuid != "") {
+
+                //  alert("get ip and country： " + ip+","+country);
+            } else {
+                //ip = prompt("Please enter your name:", "");
+                uuid = uuidv4();
+
+                if (uuid != "" && uuid != null) {
+                    setCookie("idcookie", uuid, 365);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+        function vote() {
+
+            alert("Thank you for your time!");
+
+            getCandidate();
+
+            //setInterval(getCandidate, 5000);
+
+            var voteid = uuidv4();
+
+            var age = document.getElementById("range").value;
+
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+
+            var e = document.getElementById("city");
+
+            var city = e.options[e.selectedIndex].value;
+
+            var vote = document.querySelector('input[name="candidate"]:checked').value;
+
+            var theUrl = "/mindiao/vote.php?vote=" + vote + "&userGUID=" + uuid + "&voteId=" + voteid + "&city=" + city + "&age=" + age + "&gender=" + gender;
+
+            httpGetAsync(theUrl, callback);
+
+        }
+
+
+
+
+
+
+
+        function getCandidate() {
+            //alert("感謝你的投票!");
+
+            //		window.alert("updateUI");
+
+            var theUrl = "/mindiao/candidate.php";
+            httpGetAsync(theUrl, updateUI);
+        }
+
+        function updateUI(data) {
+            jsonarray = JSON.parse(data);
+
+            var percentageView1 = document.getElementById("percentage1");
+
+            var percentage1 = Math.round(jsonarray[0].vote * 100);
+            //alert(percentage1);	
+            percentageView1.style = "width: " + percentage1 + "%;font-size:40;";
+            percentageView1.innerText = percentage1 + "%";
+
+            var percentageView2 = document.getElementById("percentage2");
+
+            var percentage2 = Math.round(jsonarray[1].vote * 100);
+
+            //alert(percentage2);
+            percentageView2.style = "width: " + percentage2 + "%;font-size:40;";
+            percentageView2.innerText = percentage2 + "%";
+
+
+
+            var percentageView3 = document.getElementById("percentage3");
+
+            var percentage3 = Math.round(jsonarray[2].vote * 100);
+            //alert(percentage3);
+            percentageView3.style = "width: " + percentage3 + "%;font-size:40;";
+            percentageView3.innerText = percentage3 + "%";
+
+
+
+            var percentageView4 = document.getElementById("percentage4");
+
+            var percentage4 = Math.round(jsonarray[3].vote * 100);
+            //alert(percentage1);
+            percentageView4.style = "width: " + percentage4 + "%;font-size:40;";
+            percentageView4.innerText = percentage4 + "%";
+
+
+
+
+
+
+
+        }
+
+        function callback(data) {
+
+            // window.alert(data);
+        }
+
+        function uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+
+
+        function httpGetAsync(theUrl, callback) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+
+        function change() {
+            var value = document.getElementById("range").value + " years old";
+
+            document.getElementById("ageLable").innerHTML = value;
+
+            //console.log(value);
+        }
+
+        function start() {
+            document.getElementById("firstView").style.display = "none";
+            document.getElementById("secondView").style.display = "block";
+            document.getElementById("buttons").style.visibility = "visible";
+
+        }
+
+
+
+
+
+        function nextStep() {
+            if (document.getElementById("firstView").style.display === "block") {
+
+
+
+                document.getElementById("firstView").style.display = "none";
+                document.getElementById("secondView").style.display = "block";
+
+            } else if (document.getElementById("secondView").style.display === "block") {
+
+                if (document.getElementById("range").value == 0) {
+                    alert("Please select your age");
+
+                } else {
+                    document.getElementById("secondView").style.display = "none";
+                    document.getElementById("thirdView").style.display = "block";
+
+                }
+
+
+            } else if (document.getElementById("thirdView").style.display === "block") {
+
+                if (document.querySelector('input[name="gender"]:checked') == null) {
+                    alert("Please select your gender");
+
+                } else {
+
+                    document.getElementById("thirdView").style.display = "none";
+                    document.getElementById("forthView").style.display = "block";
+
+                }
+
+
+
+            } else if (document.getElementById("forthView").style.display === "block") {
+
+                var e = document.getElementById("city");
+                var city = e.options[e.selectedIndex].value;
+
+                if (city == "0") {
+                    alert("Please select your city");
+
+                } else {
+                    document.getElementById("forthView").style.display = "none";
+                    document.getElementById("fifthView").style.display = "block";
+                    document.getElementById("nextStep").innerHTML = "Submit";
+
+                }
+
+
+
+            } else if (document.getElementById("fifthView").style.display === "block") {
+
+                if (document.querySelector('input[name="candidate"]:checked') == null) {
+                    alert("Please select which candidate you will vote");
+
+                } else {
+
+                    vote();
+
+                    document.getElementById("fifthView").style.display = "none";
+                    document.getElementById("sixthView").style.display = "block";
+
+
+                    document.getElementById("previous").style.visibility = "hidden";
+
+
+                    document.getElementById("nextStep").innerHTML = "Restart";
+
+
+
+                }
+
+
+
+            } else if (document.getElementById("sixthView").style.display === "block") {
+
+                location.reload();
+
+
+
+            }
+
+        }
+
+        function previous() {
+            if (document.getElementById("secondView").style.display === "block") {
+
+
+                document.getElementById("secondView").style.display = "none";
+                document.getElementById("firstView").style.display = "block";
+
+
+                document.getElementById("buttons").style.visibility = "hidden";
+
+
+
+
+            } else if (document.getElementById("thirdView").style.display === "block") {
+
+
+
+                document.getElementById("thirdView").style.display = "none";
+                document.getElementById("secondView").style.display = "block";
+
+            } else if (document.getElementById("forthView").style.display === "block") {
+                document.getElementById("forthView").style.display = "none";
+                document.getElementById("thirdView").style.display = "block";
+
+            } else if (document.getElementById("fifthView").style.display === "block") {
+                document.getElementById("fifthView").style.display = "none";
+                document.getElementById("forthView").style.display = "block";
+
+            }
+
+        }
+
+    </script>
 
 
 </head>
@@ -310,7 +323,7 @@ function uuidv4() {
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="container">
             <a class="navbar-brand display-2" href="index.html" style="font-size:40">2020tw.tw</a>
-    <!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -351,134 +364,217 @@ function uuidv4() {
                 <tr>
 
                     <td class="ml-4 h1 text-dark align-top display-1 ">
-                        2020總統大選即時民調
+                        2020 Presidential polls
                     </td>
-<!--
+                    <!--
                     <td class=" align-middle">
                         <img src="https://picsum.photos/200/200/?image=978" class="h-50 rounded-circle">
                     </td>
 -->
 
                 </tr>
-                
+
                 <tr>
 
                     <td class="ml-4 h1 text-dark align-top display-1 ">
                         <a class="btn btn-lg px-3 " href="https://play.google.com/store/apps/details?id=com.weizhi.voteandroid" role="button"><img src="https://i.ibb.co/LtJFDvV/google-play-badge.png" height="120" alt="Google Play"></a>
 
-                        
+
                     </td>
-<!--
+                    <!--
                     <td class=" align-middle">
                         <img src="https://picsum.photos/200/200/?image=978" class="h-50 rounded-circle">
                     </td>
 -->
 
                 </tr>
-                
-                 <tr>
-                <td class="ml-4 h1 text-dark align-top display-1  ">
-                        <!-- AddToAny BEGIN -->
-<div class="a2a_kit a2a_kit_size_128 a2a_default_style">
-<a class="a2a_dd"  href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_line"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
 
 
-                    </td>
-
-                </tr>
 
             </tbody>
         </table>
     </div>
 
-    
-    <div class="container mt-5">
-        <div class="h-75 row ">
-            <div class="h-50 col-lg-4 col-md-60 col-sm-12 my-1  p-3 ">
-                <button onclick="vote1()" id="vote1" class="h-50 shadow p-3 mb-5 btn btn-success rounded btn-lg btn-block" style="font-size:50;">
-                    蔡英文
-                </button>
-                <div class="h-25 progress shadow">
-                    <div id="percentage1" class="progress-bar bg-success" role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" >0%</div>
-                </div>
 
-            </div>
+    <div class="container mt-5 h-75 w-75 ">
 
-            <div class="h-50 col-lg-4 col-md-60 col-sm-12 my-1  p-3 ">
-                <button onclick="vote2()" class="h-50 shadow p-3 mb-5 btn btn-primary rounded btn-lg btn-block" style="font-size:50;">韓國瑜</button>
-                <div class="h-25 progress shadow">
-                    <div id="percentage2" class=" progress-bar " role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
-                </div>
-
-            </div>
-
-            <div class="h-50 col-lg-4 col-md-60 col-sm-12 my-1  p-3 ">
-                <button onclick="vote3()"  class="h-50 shadow p-3 mb-5 btn btn-light rounded btn-lg btn-block" style="font-size:50;">柯文哲</button>
-                <div class="h-25 progress shadow">
-                    <div id="percentage3"   class=" progress-bar bg-light text-dark " role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
-                </div>
-            </div>
-
-            <div class="h-50 col-lg-4 col-md-60 col-sm-12 my-1 p-3 ">
-                <button onclick="vote5()" class="h-50 shadow p-3 mb-5 btn btn-light rounded btn-lg btn-block" style="font-size:50;">郭台銘</button>
-                <div class="h-25 progress shadow">
-                    <div id="percentage5" class="progress-bar bg-light text-dark" role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
-                </div>
-
-            </div>
-
-            <div class="h-50 col-lg-4 col-md-60 col-sm-12 my-1 p-3 ">
-                <button onclick="vote4()" class="h-50 shadow p-3 mb-5 btn btn-secondary rounded btn-lg btn-block" style="font-size:50;">沒意見</button>
-                <div class="h-25 progress shadow">
-                    <div id="percentage4" class="progress-bar bg-secondary text-dark" role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
-                </div>
-
-            </div>
-
-<!--
-            <div id="total" class="h-50 col-lg-4 col-md-60 col-sm-12 my-1 p-3 shadow " style="font-size:50;">
-                有效票数
-                
-            </div>
--->
-
-		<div  class="h-100 col-lg-40 col-md-60 col-sm-12 my-1 p-3 shadow " style="font-size:30;">
-<div class="    mt-5 p-3">
-* 感謝訪問本站<br>
-* 請分享給所有人<br>
-* 本站自動計算過去七天內票數及支持率<br>
-* 投票後，網頁自動更新數字<br>
-* 請至少每週投票一次<br>
-* 重複投票不會造成統計錯誤<br>
-* 本站自動過濾國外的投票，防止灌票，造成誤傷，深表歉意<br>
-* 身處國外人士仍可查看支持率<br>
-<br>
-聯絡方式：wagehk@gmail.com
-
-
+        <div id="firstView" class="w-75 h-75 " style="display: block">
+            <button onclick="start()" id="start" class="h-50 shadow p-3 mb-5 btn btn-success rounded btn-lg btn-block" style="font-size:50;">
+                START
+            </button>
 
         </div>
-            </div>
+
+        <div id="secondView" class="w-75 h-75 h1" style="display: none">
+            <label for="customRange3">Please selete your age:</label>
+            <label id="ageLable">0 years old</label>
+
+            <input class="w-100 h-50 slider custom-range " id="range" type="range" min="0" max="100" value="0" oninput="change()" data-slider-handle="round" />
 
         </div>
 
 
+
+        <div id="thirdView" class="w-50 h-75 h1" style="display: none">
+            <p>Please select your gender</p>
+            <input class="w-25 " type="radio" name="gender" value="1"> Male<br>
+            <input class="w-25" type="radio" name="gender" value="2"> Female<br>
+            <input class="w-25" type="radio" name="gender" value="0"> Other<br>
+
+        </div>
+
+        <div id="forthView" class="w-75 h-75 h1" style="display: none">
+
+            <select id="city" class="w-50 h-10 ">
+                <option value="0">Please select a city</option>
+                <option value="1">Taipei</option>
+                <option value="2">Taichung</option>
+                <option value="3">Tainan</option>
+                <option value="4">Kaohsiung</option>
+                <option value="5">Hsinchu</option>
+
+
+            </select>
+
+
+        </div>
+
+        <div id="fifthView" class="w-75 h-75 h1" style="display: none">
+            <p>Please select the candidate you like</p>
+            <input class="w-25 " type="radio" name="candidate" value="1">Soong Chu-yu <br>
+            <input class="w-25" type="radio" name="candidate" value="2"> Han Kuo-yu<br>
+            <input class="w-25" type="radio" name="candidate" value="3"> Tsai Ing-wen<br>
+            <input class="w-25" type="radio" name="candidate" value="4"> Other<br>
+
+
+        </div>
+
+
+        <div id="sixthView" class="w-100 h-100 pull-left " style="display: none">
+            <p class="h2">Poll result of this week</p>
+
+            <table class="table h-50  container   ">
+
+                <tbody>
+                    <tr>
+
+                        <td class="ml-4 h1 text-dark align-top  ">
+                            <lable>Soong Chu-yu :</lable>
+                        </td>
+                        <td class=" align-middle">
+                            <div class="h-75 progress shadow">
+                                <div id="percentage1" class="progress-bar bg-warning text-dark" role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="ml-4 h1 text-dark align-top  ">
+                            <lable>Han Kuo-yu :</lable>
+
+
+                        </td>
+
+                        <td class=" align-middle">
+                            <div class="h-75 progress shadow">
+                                <div id="percentage2" class="progress-bar bg-primary text-dark" role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="ml-4 h1 text-dark align-top  ">
+                            <lable>Tsai Ing-wen:</lable>
+
+
+                        </td>
+
+                        <td class=" align-middle">
+
+                            <div class="h-75 progress shadow">
+                                <div id="percentage3" class="progress-bar bg-success text-dark" role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            </div>
+
+
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="ml-4 h1 text-dark align-top  ">
+                            <lable>Other:</lable>
+
+
+                        </td>
+
+                        <td class=" align-middle">
+
+
+
+                            <div class="h-75 progress shadow">
+                                <div id="percentage4" class="progress-bar bg-secondary text-dark" role="progressbar" style="width: 0%;font-size:40;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+
+
+
+
+
+        </div>
+
+
+
+        <div id="buttons" class="form-inline w-75 h-25" style="visibility: hidden ">
+
+
+
+            <button onclick="previous()" id="previous" class="text-center bg-secondary w-25 h-75 shadow p-3 mb-5 btn btn-success rounded btn-lg btn-block" style="font-size:15;">
+                Previous
+            </button>
+
+            <div class="w-25">
+            </div>
+
+
+
+            <button onclick="nextStep()" id="nextStep" class="text-center w-25 h-75 shadow p-3 mb-5 btn btn-success rounded btn-lg btn-block" style="font-size:15;">
+                Next
+            </button>
+
+
+
+
+        </div>
 
     </div>
 
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- your JavaScript file(s) go here -->
 
 
 </body>
+
 </html>
