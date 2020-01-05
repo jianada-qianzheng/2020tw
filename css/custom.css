@@ -1,62 +1,90 @@
 :root {
-  --blue: #007bff;
-  --indigo: #6610f2;
-  --purple: #6f42c1;
-  --pink: #e83e8c;
-  --red: #dc3545;
-  --orange: #fd7e14;
-  --yellow: #ffc107;
-  --green: #28a745;
-  --teal: #20c997;
-  --cyan: #17a2b8;
-  --white: #fff;
-  --gray: #6c757d;
-  --gray-dark: #343a40;
-  --primary: #007bff;
-  --secondary: #6c757d;
-  --success: #28a745;
-  --info: #17a2b8;
-  --warning: #ffc107;
-  
-  --danger: #dc3545;
-  --light: #20c997;
-  --dark: #643a41;
-  --breakpoint-xs: 200px;
-  --breakpoint-sm: 876px;
-  --breakpoint-md: 1068px;
-  --breakpoint-lg: 1292px;
-  --breakpoint-xl: 1500px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+
+    --danger: #dc3545;
+    --light: #20c997;
+    --dark: #643a41;
+    --breakpoint-xs: 200px;
+    --breakpoint-sm: 876px;
+    --breakpoint-md: 1068px;
+    --breakpoint-lg: 1292px;
+    --breakpoint-xl: 1500px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.bg-dark{
-    background-color:#643a41 !important;
+.bg-dark {
+    background-color: #643a41 !important;
 }
 
-.text-light{
-    color:#20c997 !important;
+.text-light {
+    color: #20c997 !important;
 }
 
 
-.navbar-dark{
-    background-color:#643a41 !important;
+.navbar-dark {
+    background-color: #643a41 !important;
 }
 
 
 .container {
-  
+
     width: 80%;
-    
-  
+
+
 }
 
+.slider {
+    /*  -webkit-appearance: none;   Override default CSS styles */
+    /*  appearance: none;*/
+    width: 100%;
+    /* Full-width */
+    height: 30%;
+    /* Specified height */
+    /*  outline: none;  Remove outline */
+    /*  -webkit-transition: .2s;  0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 40px;
+    /* Set a specific slider handle width */
+    height: 40px;
+    /* Slider handle height */
+    background: #4CAF50;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+    margin: -15px;
+}
+
+input[type=radio] {
+    
+}
 
 
 @media (max-width: 576px) {
-   .container {
-       width:100%;
-   }
+    .container {
+        width: 100%;
+    }
 }
-
